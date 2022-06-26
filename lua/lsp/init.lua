@@ -1,3 +1,15 @@
+-- [[ LSP ]]
+local v_status_ok, nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not v_status_ok then
+    print("CMP NVIM LSP failed to load!")
+    return
+end
+local l_status_ok, lspconfig = pcall(require, 'lspconfig')
+if not l_status_ok then
+    print("LspConfig failed to load!")
+    return
+end
+
 -- Use an on_attach funciton to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
@@ -6,7 +18,7 @@ local on_attach = function(_, bufnr)
 
     -- Mappings
     -- See `:help vim.lsp.*` for docs on mappings below
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
     -- Jump to declaration of item
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     -- Jump to definition of item
@@ -34,18 +46,22 @@ local on_attach = function(_, bufnr)
     -- formatting
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
-
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require'lspconfig'.pyright.setup{
-   on_attach = on_attach,
-   capabilities = capabilities
+lspconfig.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 
-require'lspconfig'.gopls.setup{
-   on_attach = on_attach,
-   capabilities = capabilities
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+lspconfig.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 
 USER = vim.fn.expand('$USER')
@@ -53,8 +69,8 @@ USER = vim.fn.expand('$USER')
 local sumneko_root_path = "/home/" .. USER .. "/.config/lua-language-server"
 local sumneko_binary = "/home/" .. USER .. "/.config/lua-language-server/bin/lua-language-server"
 
-require'lspconfig'.sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+lspconfig.sumneko_lua.setup {
+    cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -67,11 +83,11 @@ require'lspconfig'.sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
+                globals = { 'vim' }
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true }
             }
         }
     }

@@ -1,22 +1,35 @@
-local use = require('packer').use
+-- [[ PLUGINS ]]
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, 'packer')
+if not status_ok then
+    print("Packer did not load!")
+    return
+end
+-- local packer = require('packer')
+local use = packer.use
 
 -- Have packer use a popup window
-require'packer'.init {
+packer.init {
     display = {
         open_fn = function()
-            return require'packer.util'.float {
+            return require 'packer.util'.float {
                 border = 'rounded'
             }
         end
     }
 }
 
-return require('packer').startup(function()
+return packer.startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    use 'nvim-lua/plenary.nvim'
     -- Configurations for Nvim LSP
+    -- use {
+    --     'neovim/nvim-lspconfig',
+    --     filetype = { 'py', 'lua', 'go' }
+    -- }
     use 'neovim/nvim-lspconfig'
-    -- Plugin for nvim-conf autocompletion 
+    -- Plugin for nvim-conf autocompletion
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -30,26 +43,33 @@ return require('packer').startup(function()
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
-     -- Color
+    -- Color
     use 'norcalli/nvim-colorizer.lua'
-     -- Status Bar
-    use { 
+    -- Smarter syntax highlighting
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    -- Rainbow brackets
+    use 'p00f/nvim-ts-rainbow'
+    -- Status Bar
+    use {
         'nvim-lualine/lualine.nvim',
-         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-     }
-    -- Find, Filter, Preview
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
+    -- [[ Telescope - Find, Filter, Preview ]]
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/plenary.nvim'}}
+        requires = { 'nvim-lua/plenary.nvim' }
     }
     -- code structure
-    use {'majutsushi/tagbar'}
+    use { 'majutsushi/tagbar' }
     -- see indentation
-    use {'Yggdroot/indentLine'}
-    -- git integration                   
-    use {'tpope/vim-fugitive'}
-    -- commit history                    
-    use {'junegunn/gv.vim'}
-    -- auto close brackets, etc.                       
-    use {'windwp/nvim-autopairs'}
+    use { 'Yggdroot/indentLine' }
+    -- git integration
+    use { 'tpope/vim-fugitive' }
+    -- commit history
+    use { 'junegunn/gv.vim' }
+    -- auto close brackets, etc.
+    use { 'windwp/nvim-autopairs' }
 end)

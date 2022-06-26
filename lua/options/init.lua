@@ -7,7 +7,7 @@ local options = {
     relativenumber = false,
     -- Minimum number lines of context
     scrolloff = 5,
-    -- Highlight the cursor line for readability 
+    -- Highlight the cursor line for readability
     cursorline = true,
 
     -- [[ Filetypes ]]
@@ -29,7 +29,7 @@ local options = {
     -- Use incremental search
     incsearch = true,
     -- Highlight search matches
-    smartcase = true,
+    --    smartcase = true,
 
     -- [[ Whitespace ]]
     -- Use spaces instead of tabs
