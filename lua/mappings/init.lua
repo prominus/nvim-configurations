@@ -1,3 +1,9 @@
+-- LEADER
+-- These keybindings need to be defined before the first /
+-- is called; otherwise, it will default to "\"
+vim.g.mapleader = ","
+vim.g.localleader = "\\"
+
 -- Mappings
 -- See `:help vim.diagnostic.*` for dos on functions below
 local opts = { noremap=true, silent=true }
