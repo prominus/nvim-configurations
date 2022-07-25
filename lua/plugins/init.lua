@@ -23,11 +23,7 @@ return packer.startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
     use 'nvim-lua/plenary.nvim'
-    -- Configurations for Nvim LSP
-    -- use {
-    --     'neovim/nvim-lspconfig',
-    --     filetype = { 'py', 'lua', 'go' }
-    -- }
+    -- [[ Language Server Client ]]
     use 'neovim/nvim-lspconfig'
     -- Plugin for nvim-conf autocompletion
     use 'hrsh7th/nvim-cmp'
@@ -63,13 +59,29 @@ return packer.startup(function()
         requires = { 'nvim-lua/plenary.nvim' }
     }
     -- code structure
-    use { 'majutsushi/tagbar' }
+    -- use { 'majutsushi/tagbar' }
     -- see indentation
     use { 'Yggdroot/indentLine' }
     -- git integration
-    use { 'tpope/vim-fugitive' }
+    -- use { 'tpope/vim-fugitive' }
     -- commit history
-    use { 'junegunn/gv.vim' }
+    -- use { 'junegunn/gv.vim' }
     -- auto close brackets, etc.
     use { 'windwp/nvim-autopairs' }
+    -- [[ Commenting out ]]
+    use 'b3nj5m1n/kommentary'
+    -- [[ Debug Adapter Protocol ]]
+    use 'mfussenegger/nvim-dap'
+    use {
+        'mfussenegger/nvim-dap-python',
+        requires = { 'mfussenegger/nvim-dap' }
+    }
+    use {
+        'jbyuki/one-small-step-for-vimkind',
+        requires = { 'mfussenegger/nvim-dap' }
+    }
+    use {
+        'leoluz/nvim-dap-go',
+        requires = { 'mfussenegger/nvim-dap' }
+    }
 end)

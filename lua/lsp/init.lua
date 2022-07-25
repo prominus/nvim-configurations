@@ -38,7 +38,7 @@ local on_attach = function(_, bufnr)
     -- Jumps to the definition of the type of the symbol under the cursor
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
     -- Rename value under cursor
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
     -- Code Action
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.code_action, bufopts)
     -- get references
@@ -77,7 +77,7 @@ lspconfig.sumneko_lua.setup {
         Lua = {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
+                version = 'Lua5.3',
                 -- Setup your lua path
                 path = vim.split(package.path, ';')
             },

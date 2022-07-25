@@ -68,6 +68,9 @@ treesitter.setup {
 
     -- Install parsers synchronously
     sync_install = false,
+    autopairs = {
+        enable = true,
+    },
     highlight = {
         enable = true,
         disable = { "" },

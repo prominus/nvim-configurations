@@ -27,6 +27,48 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 -- Add buffer diagnostics to the location list
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+-- [[ Debug ]]
+vim.keymap.set('n', '<F5>', function() require("dap").continue() end, opts)
+
+vim.keymap.set('n', '<F10>', function() require("dap").step_over() end, opts)
+
+vim.keymap.set('n', '<F11>', function() require("dap").step_into() end, opts)
+
+vim.keymap.set('n', '<F12>', function() require("dap").step_out() end, opts)
+
+vim.keymap.set('n', '<Leader>b', function() require("dap").toggle_breakpoint() end, opts)
+
+vim.keymap.set('n', '<Leader>B', function()
+    require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: '))
+end, opts)
+
+vim.keymap.set('n', '<Leader>lp', function()
+    require("dap").set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+end, opts)
+
+vim.keymap.set('n', '<Leader>dr', function() require("dap").repl.open() end, opts)
+
+vim.keymap.set('n', '<Leader>dl', function() require("dap").run_last() end, opts)
+
+vim.keymap.set('n', '<Leader>sc', function()
+    local widgets = require("dap.ui.widgets")
+    local sidebar = widgets.sidebar(widgets.scopes)
+    sidebar.open()
+end, opts)
+
+vim.keymap.set('n', '<Leader>fr', function()
+    local widgets = require("dap.ui.widgets")
+    local sidebar = widgets.sidebar(widgets.frames)
+    sidebar.open()
+end, opts)
+
+vim.keymap.set('n', '<Leader>ex', function()
+    local widgets = require("dap.ui.widgets")
+    local sidebar = widgets.sidebar(widgets.expressions)
+    sidebar.open()
+end, opts)
+
+
 -- [[ Snippets]]
 local snip_jump = function(j)
     require 'luasnip'.jump(j)
@@ -54,10 +96,10 @@ vim.keymap.set('n', "wk", "<C-w>k", opts)
 vim.keymap.set('n', "wl", "<C-w>l", opts)
 
 -- [[ Window Resize ]]
-vim.keymap.set('n', 'C-Up', ":resize +2<CR>", opts)
-vim.keymap.set('n', 'C-Down', ":resize -2<CR>", opts)
-vim.keymap.set('n', 'C-Left', ":vertical -2<CR>", opts)
-vim.keymap.set('n', 'C-Right', ":vertical +2<CR>", opts)
+vim.keymap.set('n', '<C-Up>', ":resize +2<CR>", opts)
+vim.keymap.set('n', '<C-Down>', ":resize -2<CR>", opts)
+vim.keymap.set('n', '<C-Left>', ":vertical -2<CR>", opts)
+vim.keymap.set('n', '<C-Right>', ":vertical +2<CR>", opts)
 
 -- [[ VS Code Indent]]
 vim.keymap.set('v', '<Tab>', ">gv", opts)
