@@ -92,3 +92,9 @@ lspconfig.sumneko_lua.setup {
         }
     }
 }
+
+local r_status_ok, rust_tools = pcall(require, 'rust-tools')
+if not r_status_ok then
+    print("Rust Tools setup failed.")
+end
+rust_tools.setup({})

@@ -90,10 +90,10 @@ end, opts)
 vim.keymap.set(toggle_modes, 'T', ":NvimTreeToggle<CR>", opts)
 
 -- [[ Window Nav ]]
-vim.keymap.set('n', "wh", "<C-w>h", opts)
-vim.keymap.set('n', "wj", "<C-w>j", opts)
-vim.keymap.set('n', "wk", "<C-w>k", opts)
-vim.keymap.set('n', "wl", "<C-w>l", opts)
+vim.keymap.set('n', "<Leader>-<Left>", "<C-w>h", opts)
+vim.keymap.set('n', "<Leader>-<Down>", "<C-w>j", opts)
+vim.keymap.set('n', "<Leader>-<Up>", "<C-w>k", opts)
+vim.keymap.set('n', "<Leaver>-<Right>", "<C-w>l", opts)
 
 -- [[ Window Resize ]]
 vim.keymap.set('n', '<C-Up>', ":resize +2<CR>", opts)

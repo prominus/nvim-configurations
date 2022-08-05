@@ -32,6 +32,8 @@ return packer.startup(function()
     use 'hrsh7th/cmp-path'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
+    -- [[Rust tools]]
+    use 'simrat39/rust-tools.nvim'
     -- Snippets
     use 'rafamadriz/friendly-snippets'
     -- Complex file system explorer
