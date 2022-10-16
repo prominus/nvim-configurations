@@ -44,7 +44,7 @@ local on_attach = function(_, bufnr)
     -- get references
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     -- formatting
-    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 end
 -- Setup lspconfig.
 local capabilities = nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
